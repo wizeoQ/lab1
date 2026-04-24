@@ -21,14 +21,14 @@ f.ex(2)
 print("\n    9*pi*t+10cos(x)")
 print("Z = ──────────────── * e^x")
 print("    sqrt(t)-|sin(t)|")
-print("\nгде x=10; t=1.")
 
 f.l(5)
 
-x=10.0
-t=1.0
+x=float(input("Введите x - "))
+t=float(input("Введите t - "))
+
 a=9*n.pi*t+10*n.cos(x)
 b=n.sqrt(t)-abs(n.sin(t))
 z=a/b*n.e**x
 
-print("Ответ: Z =", round(z,2))
+print("\nОтвет: Z =", round(z,2))
