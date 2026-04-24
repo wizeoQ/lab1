@@ -25,8 +25,27 @@ print("    sqrt(t)-|sin(t)|")
 f.l(5)
 
 x=float(input("Введите x - "))
-t=str(input("Введите t (можно ввести массив через запятую):\n"))
+print("Введите t")
+print("Если хотите ввести массив - вводите через запятую")
+print("Если нужен диапазон, введите \"d\"",end="")
+t=str(input("\t> "))
 f.l(5)
+#------------------Построение диапазона----------------
+if t=='d':
+    start = float(input("Введите старт массива > "))
+    end = float(input("Введите конец массива > "))
+    points = int(input("Введите количество элементов > "))
+    if points<=0:
+        print("Элементы отсутствуют.")
+        t='0'
+    elif points==1:
+        t=str(n.average([start,end]))
+    elif points==2:
+        t=str(str(start)+','+str(end))
+    else:
+        print("пока ничего")
+        t='0'
+#------------------Построение диапазона----------------
 t.replace(' ','')
 t_list=t.split(',')
 l = len(t_list)
@@ -43,7 +62,7 @@ while i!=l:
     if t==0:
         z=0
         print("Z("+str(t)+") =", round(z,2))
-    if t<0:
+    elif t<0:
         a=9*n.pi*t+10*n.cos(x)
         b=n.sqrt(complex(t))-abs(n.sin(t))
         z=a/b*n.exp(x)
