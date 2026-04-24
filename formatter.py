@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 def ex(exercize):
     print("\n==========")
     print("Задание ", exercize)
