@@ -35,8 +35,13 @@ while i!=l: #Цикл для массива
         z=0
         print("Z("+str(t)+") =", round(z,2))
     if t<0:
-#       print("Z("+str(t)+") =", round(n.real(z),2)+'i'+round(n.imag(z),2))
-        print("Z("+str(t)+") = Комплексное число")
+        a=9*n.pi*t+10*n.cos(x)
+        b=n.sqrt(complex(t))-abs(n.sin(t))
+        z=a/b*n.e**x
+        if n.imag(z)<0:
+            print("Z("+str(t)+") =", str(round(n.real(z),2))+'-'+str(round(n.imag(z),2))+'i')    
+        else:
+            print("Z("+str(t)+") =", str(round(n.real(z),2))+'+'+str(round(n.imag(z),2))+'i')
     else:
         a=9*n.pi*t+10*n.cos(x)
         b=n.sqrt(t)-abs(n.sin(t))
