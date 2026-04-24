@@ -35,6 +35,11 @@ if t=='d':
     start = float(input("Введите старт массива > "))
     end = float(input("Введите конец массива > "))
     points = int(input("Введите количество элементов > "))
+    if start>end:
+        temp=start
+        end=start
+        start=temp
+        
     if points<=0:
         print("Элементы отсутствуют.")
         t='0'
@@ -43,8 +48,21 @@ if t=='d':
     elif points==2:
         t=str(str(start)+','+str(end))
     else:
-        print("пока ничего")
-        t='0'
+        inter=((end-start)/(points-1))
+        t=[]
+        t.append(start)
+        t.append(',')
+        i=1
+        while i<(points-1):
+            t.append(round(inter*i+start,2))
+            t.append(',')
+            i+=1
+        t.append(end)
+        temp=''
+        for i in t:
+            temp = temp+str(i)
+        t=temp
+        #t=str(str(start)+','+str(inter)+','+str(end))
 #------------------Построение диапазона----------------
 t.replace(' ','')
 t_list=t.split(',')
