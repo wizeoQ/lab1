@@ -28,6 +28,18 @@ x=float(input("Введите x - "))
 t=str(input("Введите t (можно ввести массив через запятую):\n"))
 f.l(5)
 
+#----Удаление лишних символов----
+t_temp = []
+for i in t:
+    if i==' ':
+        continue
+    else:
+        t_temp.append(i)
+cash=''
+for i in t_temp:
+    cash = cash + i
+t=cash
+#--------------------------------
 t_list=t.split(',')
 l = len(t_list)
 t_list_temp=[]
@@ -36,6 +48,7 @@ for i in t_list:
     t_list_temp.append(i)
 t_list=t_list_temp
 
+#------------------Блок вычислений----------------
 i=0
 while i!=l:
     t = float(t_list[i])
@@ -56,3 +69,4 @@ while i!=l:
         z=a/b*n.e**x
         print("Z("+str(t)+") =", round(z,2))
     i+=1
+#------------------Блок вычислений----------------
