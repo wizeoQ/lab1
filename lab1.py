@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import formatter as f
-import numpy as n
-
+import numpy as np
+import matplotlib.pyplot as plt
 #f.ex(1)
 #
 #name = input ("Ваши имя, фамилия, отчество?\n\t> ")
@@ -36,7 +36,7 @@ if t=='d':
     end = float(input("Введите конец массива > "))
     points = int(input("Введите количество элементов > "))
     if start>end:
-        temp=start
+        temp=end
         end=start
         start=temp
         
@@ -44,7 +44,7 @@ if t=='d':
         print("Элементы отсутствуют.")
         t='0'
     elif points==1:
-        t=str(n.average([start,end]))
+        t=str(np.average([start,end]))
     elif points==2:
         t=str(str(start)+','+str(end))
     else:
@@ -64,7 +64,7 @@ if t=='d':
         t=temp
         #t=str(str(start)+','+str(inter)+','+str(end))
 #------------------Построение диапазона----------------
-t.replace(' ','')
+t=t.replace(' ','')
 t_list=t.split(',')
 l = len(t_list)
 t_list_temp=[]
@@ -74,24 +74,30 @@ for i in t_list:
 t_list=t_list_temp
 
 #------------------Блок вычислений----------------
+z_list=[]
 i=0
 while i!=l:
     t = float(t_list[i])
     if t==0:
         z=0
-        print("Z("+str(t)+") =", round(z,2))
+#        print("Z("+str(t)+") =", round(z,2))
     elif t<0:
-        a=9*n.pi*t+10*n.cos(x)
-        b=n.sqrt(complex(t))-abs(n.sin(t))
-        z=a/b*n.exp(x)
-        if n.imag(z)<0:
-            print("Z("+str(t)+") =", str(round(n.real(z),2))+'-'+str(round(n.imag(z),2))+'i')    
-        else:
-            print("Z("+str(t)+") =", str(round(n.real(z),2))+'+'+str(round(n.imag(z),2))+'i')
+        a=9*np.pi*t+10*np.cos(x)
+        b=np.sqrt(complex(t))-abs(np.sin(t))
+        z=a/b*np.exp(x)
+#        if np.imag(z)<0:
+#            print("Z("+str(t)+") =", str(round(np.real(z),2))+'-'+str(round(np.imag(z),2))+'i')    
+#        else:
+#            print("Z("+str(t)+") =", str(round(np.real(z),2))+'+'+str(round(np.imag(z),2))+'i')
     else:
-        a=9*n.pi*t+10*n.cos(x)
-        b=n.sqrt(t)-abs(n.sin(t))
-        z=a/b*n.e**x
-        print("Z("+str(t)+") =", round(z,2))
+        a=9*np.pi*t+10*np.cos(x)
+        b=np.sqrt(t)-abs(np.sin(t))
+        z=a/b*np.exp(x)
+#        print("Z("+str(t)+") =", round(z,2))
     i+=1
+    z_list.append(round(z,2))
 #------------------Блок вычислений----------------
+plt.plot(t_list,np.real(z_list))
+plt.xlabel("t")
+plt.ylabel("Z(t)")
+plt.show
