@@ -3,16 +3,16 @@
 
 import formatter as f
 
-f.z(1)
+f.ex(1)
 
 name = input ("Ваши имя, фамилия, отчество?\n\t> ")
 age = input ("Сколько Вам лет?\n\t> ")
 place = input ("Где Вы живёте?\n\t> ")
 
-f.t(3)
+f.d(3)
 
 print("Ваши ФИО -", name, end="\n")
 print("Ваш возраст -", age, end="\n")
 print("Вы живёте в -", place, end="")
 
-f.r()
+f.eq()
