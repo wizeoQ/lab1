@@ -24,17 +24,20 @@ print("    sqrt(t)-|sin(t)|")
 
 f.l(5)
 
-x=str(input("Введите x (можно ввести массив через запятую):\n"))
-t_list=x.split(',')
+x=float(input("Введите x - "))
+t=str(input("Введите t (можно ввести массив через запятую):\n"))
+f.l(5)
+
+t_list=t.split(',')
 l = len(t_list)
 t_list_temp=[]
 for i in t_list:
     i=float(i)
     t_list_temp.append(i)
-#t=0.0
 t_list=t_list_temp
+
 i=0
-while i!=l: #Цикл для массива
+while i!=l:
     t = float(t_list[i])
     if t==0:
         z=0
@@ -53,14 +56,3 @@ while i!=l: #Цикл для массива
         z=a/b*n.e**x
         print("Z("+str(t)+") =", round(z,2))
     i+=1
-    
-#while t!=11: #Цикл для одного значения
-#    if t==0:
-#        z=0
-#        print("Z("+str(int(t))+") =", round(z,2))
-#    else:
-#        a=9*n.pi*t+10*n.cos(x)
-#        b=n.sqrt(t)-abs(n.sin(t))
-#        z=a/b*n.e**x
-#        print("Z("+str(int(t))+") =", round(z,2))
-#    t+=1
