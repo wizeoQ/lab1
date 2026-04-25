@@ -2,9 +2,36 @@ import formatter as f
 
 f.ex(3)
 
-a=[1,2,5]
-print("Массив -", a,"\nСреди них интервалу [1,3] принадлежат:")
-for i in a:
-    if i>=1 and i<=3:
-        print(i,end=' ')
+print("Введите через запятую диапазон чисел, который необходимо проверить.")
+while True:
+    try:
+        points=list(map(float,input(">").split(',')))
+        break
+    except (ValueError, TypeError):
+        print("Неправильный тип данных.")
+
+f.l()
+print("Введите начало диапазона, в котором будет проверка.")
+while True:
+    try:
+        start=float(input(">"))
+        break
+    except (ValueError, TypeError):
+        print("Неправильный тип данных.")
+f.l()
+print("Введите конец диапазона, в котором будет проверка.")
+while True:
+    try:
+        end=float(input(">"))
+        break
+    except (ValueError, TypeError):
+        print("Неправильный тип данных.")
+
+if start>end:
+    start,end=end,start
+f.l()
+print("Массив -", points,"\nСреди них интервалу [",start,",",end,"] принадлежат:")
+for i in points:
+    if i>=start and i<=end:
+        print(i,end=' , ')
 f.eq()
