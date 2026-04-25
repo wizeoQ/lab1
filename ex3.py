@@ -2,7 +2,7 @@ import formatter as f
 
 f.ex(3)
 
-print("Введите через запятую диапазон чисел, который необходимо проверить.")
+print("Введите через запятую диапазон чисел, который необходимо провести")
 while True:
     try:
         points=list(map(float,input(">").split(',')))
@@ -11,6 +11,7 @@ while True:
         print("Неправильный тип данных.")
 
 f.l()
+
 print("Введите начало диапазона, в котором будет проверка.")
 while True:
     try:
@@ -18,7 +19,9 @@ while True:
         break
     except (ValueError, TypeError):
         print("Неправильный тип данных.")
+
 f.l()
+
 print("Введите конец диапазона, в котором будет проверка.")
 while True:
     try:
@@ -29,9 +32,16 @@ while True:
 
 if start>end:
     start,end=end,start
+
 f.l()
-print("Массив -", points,"\nСреди них интервалу [",start,",",end,"] принадлежат:")
-for i in points:
-    if i>=start and i<=end:
-        print(i,end=' , ')
+
+print("Массив",points,"\nСреди них интервалу [",start,",",end,"] принадлежат:\n",sep='')
+
+i=0
+
+while i!=len(points):
+    if points[i]>=start and points[i]<=end:
+        print(points[i],'(',i,')',sep='')
+    i+=1
+
 f.eq()
