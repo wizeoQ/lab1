@@ -35,7 +35,7 @@ f.ex(3)
 
 points=[12,6,1,3,7,10,0,5,9]
 start=-6.0
-end=6.0
+end=7.0
 
 #---Проверка на принадлежность массиву---
 print("Массив:\n",points,"\n\nСреди них отрезку [",start,",",end,"] принадлежат:\n",sep='')
@@ -54,10 +54,13 @@ f.l()
 #---Сортировка данных---
 print("Сортировка массива:")
 sort=np.sort(calc_out)
-
-sort_index = []
-for i in np.argsort(calc_out):
-    sort_index.append(calc_index[i])
+sort_temp=list(np.argsort(calc_out))
+sort_index = list('w'*len(sort))
+i=0
+while i!=len(calc_out):
+    a=sort_temp.index(i)
+    sort_index[a]=calc_index[i]
+    i+=1
 i=0
 while i!=len(sort):
     print(sort[i],'(',sort_index[i],')',sep='')
