@@ -1,43 +1,43 @@
 import formatter as f
 import numpy as np
-
+import matplotlib.pyplot as plt
 f.ex(3)
 #---Ввод данных---
-print("Введите через запятую диапазон чисел, который необходимо провести")
-while True:
-    try:
-        points=list(map(float,input(">").split(',')))
-        break
-    except (ValueError, TypeError):
-        print("Неправильный тип данных.")
+#print("Введите через запятую диапазон чисел, который необходимо провести")
+#while True:
+#    try:
+#        points=list(map(float,input(">").split(',')))
+#        break
+#    except (ValueError, TypeError):
+#        print("Неправильный тип данных.")
+#
+#f.l()
+#
+#print("Введите начало диапазона, в котором будет проверка.")
+#while True:
+#    try:
+#        start=float(input(">"))
+#        break
+#    except (ValueError, TypeError):
+#        print("Неправильный тип данных.")
+#
+#f.l()
+#
+#print("Введите конец диапазона, в котором будет проверка.")
+#while True:
+#    try:
+#        end=float(input(">"))
+#        break
+#    except (ValueError, TypeError):
+#        print("Неправильный тип данных.")
+#if start>end:
+#    start,end=end,start
 
 f.l()
 
-print("Введите начало диапазона, в котором будет проверка.")
-while True:
-    try:
-        start=float(input(">"))
-        break
-    except (ValueError, TypeError):
-        print("Неправильный тип данных.")
-
-f.l()
-
-print("Введите конец диапазона, в котором будет проверка.")
-while True:
-    try:
-        end=float(input(">"))
-        break
-    except (ValueError, TypeError):
-        print("Неправильный тип данных.")
-if start>end:
-    start,end=end,start
-
-f.l()
-
-#points=[12,6,1,3,7,10,0,5,9]
-#start=-60.0
-#end=-7.0
+points=[12,6,2,1,3,7,10,0,5,9]
+start=-1.0
+end=7.5
 calc_out=[]
 calc_index=[]
 i=0
@@ -73,3 +73,14 @@ else:
         i+=1
             
     f.eq()
+    
+    #---Вывод графика
+    df=sort[-1]-sort[0] #Длина сортировки
+    plt.axhline(y=0,color='red') #Вся ось (красная)
+    plt.axvline(x=0,color='grey',linestyle='--',alpha=0.25)
+    plt.axis([start-0.1*df,end+0.1*df,-1,1]) #Масштаб осей
+    plt.hlines(0,start,end,color='black') #Область допустимых значений
+    plt.plot(sort,np.linspace(0,0,len(sort)),'go')
+    for i,j in zip(sort,sort_index):
+        plt.text(i,0.07,(str(i)+'('+str(j)+')'),horizontalalignment='center')
+    plt.show()
