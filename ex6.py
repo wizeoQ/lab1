@@ -7,34 +7,67 @@ f.ex(6)
 #Вывод формулы
 print("\n          / a*[(5pi*t)^2+3cos(2x)] \\")
 print("Z(t,x,a)= |────────────────────────| * beta")
-print("          \\    ln(|t|+1-sin(t)^2   /")
+print("          \\    ln(|t|+1)-sin(t)^2  /")
 print("\n, где beta - e^(-ax)+sqrt(at)")
 f.l()
 #Ввод данных
 print("Введите t\nДля ввода массива используйте запятые.",end="")
-while True:
-    try:
-        t=list(map(float,(input(">").split(','))))
-        break
-    except ValueError:print("\nНеверный тип данных\nВведите t",end="")
+print("Для ввода диапазона введите d.",end="")
+t=input(">")
 
-while True:
+#Ввод диапазона
+if t!='d':
     try:
-        x=float(input("Введите x\n>"))
-        break
-    except ValueError:print("Неверный тип данных")
+        t=list(map(float,(t.split(','))))
+    except ValueError:
+        print("\nНеверный тип данных\nВведите t",end="")
+        while True:
+            try:
+                t=input('>')
+                if t=='d':break
+                t=list(map(float,t.split(',')))
+                break
+            except ValueError:print("Неверный тип данных")
+    points=1
+#Ввод t
+if t=='d':
+    t=0
+    while True:
+        try:
+            start=float(input("Введите начало массива\n>"))
+            break
+        except ValueError:print("Неверный тип данных\n>")
+    while True:
+        try:
+            end=float(input("Введите конец массива\n>"))
+            break
+        except ValueError:print("Неверный тип данных.")
+    while True:
+        try:
+            points=int(input("Введите количество элементов\n>"))
+            t=np.linspace(start,end,points)
+            break
+        except (ValueError, TypeError):print("Неверный тип данных или отрицательное значение.")
 
-while True:
-    try:
-        a=float(input("Введите a (диапазон 0.1 до 5.0)\n>"))
-        if 0.1<=a<=5: break
-        else:print("Значения нет в диапазоне.")
-    except ValueError: print("Неверный тип данных")
-f.l()
-#Крайние случаи
+#Крайние случаи       
 if len(list(t))==1 and t[0]==0:print("Деление на ноль.")
+elif points==0:print("Значения отсутствуют.")
+
 #Расчёт выражения.
 else:
+    while True:
+        try:
+            x=float(input("Введите x\n>"))
+            break
+        except ValueError:print("Неверный тип данных")
+
+    while True:
+        try:
+            a=float(input("Введите a (диапазон 0.1 до 5.0)\n>"))
+            if 0.1<=a<=5: break
+            else:print("Значения нет в диапазоне.")
+        except ValueError: print("Неверный тип данных")
+    f.l()
     z=[]
     for t_i in t:
         if t_i==0:z.append(np.nan)
@@ -64,6 +97,6 @@ else:
                     if z_ii==0:z_ii='' #число не мнимое
                     elif z_ii>0:z_ii='+'+str(z_ii)+'i'
                     elif z_ii<0:z_ii=str(z_ii)+'i' #минус сам допишется
-                print("Z(",t_i,", ",x,", ",a,") = ",z_ir,z_ii,sep='')
+                print("Z(",round(t_i,3),", ",x,", ",a,") = ",z_ir,z_ii,sep='')
             break
         if out_flag in "nN0нН":break
