@@ -1,7 +1,7 @@
 import formatter as f
 
-f.ex(1)
+f.ex(6)
 
-
+#67
 
 f.eq()
