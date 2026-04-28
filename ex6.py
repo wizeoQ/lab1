@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 f.ex(6)
 
 #Ввод данных
+print("Введите t\nДля ввода массива используйте запятые.",end="")
 while True:
     try:
-        t=float(input("Введите t\n>"))
+        t=list(map(float,(input(">").split(','))))
         break
-    except ValueError:print("Неверный тип данных")
+    except ValueError:print("\nНеверный тип данных\nВведите t",end="")
 
 while True:
     try:
@@ -23,5 +24,5 @@ while True:
         if 0.1<=a<=5: break
         else:print("Значения нет в диапазоне.")
     except ValueError: print("Неверный тип данных")
-
-f.eq()
+    
+f.l()
