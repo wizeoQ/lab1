@@ -42,7 +42,7 @@ def yes_or_not(Function_yes=lambda:None,Function_not=lambda:None):
     По умолчанию в обоих случаях функции ничего не делают.
     """
     while True:
-        out_flag=input('>')
+        out_flag=input('(y/n)>:')
         if out_flag=="":continue
         elif out_flag in "yY1дД":
             Function_yes()
@@ -65,21 +65,23 @@ def simple_complex(x,round_digitals=3,is_print=False,is_i=True,is_return=True):
     is_return - возвращать ли строку в result
     """
     rnd=int(round_digitals)
-    if is_i==True:unit='i'
-    if is_i==False:unit='j'
-    if np.isnan(x)==True:x_ir,x_ii="nan",'' #случай nan
-    elif np.isinf(x)==True:x_ir,x_ii="inf",'' #случай inf
+    if is_i:unit='i'
+    if not is_i:unit='j'
+    if np.isnan(x):x_ir,x_ii="nan",'' #случай nan
+    elif np.isinf(x):x_ir,x_ii="inf",'' #случай inf
     else:
         x_ir=round(float(np.real(x)),rnd)
         x_ii=round(float(np.imag(x)),rnd)
         if float(x_ir)==int(x_ir):x_ir=int(x_ir) #убираем лишний .0
         if float(x_ii)==int(x_ii):x_ii=int(x_ii) #убираем лишний .0
+        if x_ir==0 and x_ii!=0:x_ir='' #число не вещественное
         if x_ii==0:x_ii='' #число не мнимое
-        elif x_ii>0:x_ii='+'+str(x_ii)+unit
+        elif x_ii>0 and x_ir!='':x_ii='+'+str(x_ii)+unit
+        elif x_ii>0 and x_ir=='':x_ii=str(x_ii)+unit
         elif x_ii<0:x_ii=str(x_ii)+unit #минус сам допишется
     result=str(x_ir)+str(x_ii)
-    if is_print==True:print(result)
-    if is_return==True:return result
+    if is_print:print(result)
+    if is_return:return result
     
 
 def multi_input():
@@ -132,6 +134,25 @@ def multi_input():
         x=[]
     return x
 
+def defend_input(complex_allow=False,nan_inf_allow=False):
+    """
+    Даёт пользователю возможность назначить переменную с защитой
+    значения от неверного типа данных.
+    return(float)
+    complex_allow позволяет работать с комплексными числами.
+    nan_inf_allow позволяют обрабатывать nan и inf как валидный результат
+    """
+    while True:
+        try:
+            if complex_allow:x=complex(input(">"))
+            if not complex_allow:x=float(input(">"))
+            if not nan_inf_allow and np.isnan(x):raise ValueError
+            if not nan_inf_allow and np.isinf(x):raise ValueError
+            return x
+        except ValueError:
+            print("Неверный тип данных.")
+            
+            
 def greek_alphabet():
     """
     Выводит в консоль греческий алфавит,знак корня и умножения для копипаста.
