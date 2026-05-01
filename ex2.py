@@ -14,16 +14,17 @@ def run_exercise_2() -> None:
     print("      √(t)-|sin(t)|")
     f.l()
     #-------------Ввод данных----------------    
-    print("Введите x", end = "")
+    print("Введите x", end="")
     x = f.defend_input()
     f.l()
     print("Введите t")
     t = f.multi_input()
-    if len(t) == 0: return None
+    if len(t) == 0: return
     #------------------Блок вычислений----------------
     z = []
     for i in t:
-            if i==0:z.append(np.nan)
+            if i == 0:
+                z.append(np.nan)
             else: 
                 numerator = 9 * np.pi * i + 10 * np.cos(x)
                 denominator = np.sqrt(complex(i)) - abs(np.sin(i))
@@ -33,8 +34,8 @@ def run_exercise_2() -> None:
     def print_z():
         f.l()
         for i, j in zip(t, z):
-            print("Z(", round(i, 3), ")", sep = "", end = "")
-            print(" = ", f.simple_complex(j, 3), sep = "")
+            print("Z(", round(i, 3), ")", sep="", end="")
+            print(" = ", f.simple_complex(j, 3), sep="")
     
     
     def draw_plot():
