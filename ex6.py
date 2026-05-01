@@ -1,104 +1,76 @@
-import formatter as f
 import numpy as np
+from numpy import nan, pi, cos, sin, log, exp, sqrt
 import matplotlib.pyplot as plt
+import formatter as f
 
-def run_exercise_6():
+
+def run_exercise_6() -> None:
+    """
+    Выполняет упражнение №6"
+    """
     f.ex(6)
-    
-    #Вывод формулы
-    print("\n          / a*[(5pi*t)^2+3cos(2x)] \\")
-    print("Z(t,x,a)= |────────────────────────| * beta")
-    print("          \\    ln(|t|+1)-sin(t)^2  /")
-    print("\n, где beta - e^(-ax)+sqrt(at)")
+    # Вывод формулы
+    print("\n           / α⋅[(5πt)^2 + 3cos(2x)]\\")
+    print("Z(t,x,α) = |────────────────────────| ⋅ β")
+    print("           \\  ln(|t|+1) - sin(t)^2 /")
+    print("\n, где β = e^(-αx) + √αt")
     f.l()
-    #Ввод данных
-    print("Введите t\nДля ввода массива используйте запятые.",end="")
-    print("Для ввода диапазона введите d.",end="")
-    t=input(">")
-    
-    #Ввод диапазона
-    if t!='d':
-        try:
-            t=list(map(float,(t.split(','))))
-        except ValueError:
-            print("\nНеверный тип данных\nВведите t",end="")
-            while True:
-                try:
-                    t=input('>')
-                    if t=='d':break
-                    t=list(map(float,t.split(',')))
-                    break
-                except ValueError:print("Неверный тип данных")
-        points=1
-    #Ввод t
-    if t=='d':
-        t=0
-        while True:
-            try:
-                start=float(input("Введите начало массива\n>"))
-                break
-            except ValueError:print("Неверный тип данных\n>")
-        while True:
-            try:
-                end=float(input("Введите конец массива\n>"))
-                break
-            except ValueError:print("Неверный тип данных.")
-        while True:
-            try:
-                points=int(input("Введите количество элементов\n>"))
-                t=np.linspace(start,end,points)
-                break
-            except (ValueError, TypeError):print("Неверный тип данных или отрицательное значение.")
-    
-    #Крайние случаи       
-    if len(list(t))==1 and t[0]==0:print("Деление на ноль.")
-    elif points==0:print("Значения отсутствуют.")
-    
-    #Расчёт выражения.
-    else:
-        while True:
-            try:
-                x=float(input("Введите x\n>"))
-                break
-            except ValueError:print("Неверный тип данных")
-    
-        while True:
-            try:
-                a=float(input("Введите a (диапазон 0.1 до 5.0)\n>"))
-                if 0.1<=a<=5: break
-                else:print("Значения нет в диапазоне.")
-            except ValueError: print("Неверный тип данных")
+    # Ввод t
+    print("Введите t")
+    t = f.multi_input()
+    # Крайние случаи       
+    if len(t) == 1 and t[0] == 0:
+        print("Деление на ноль.")
+        return
+    if len(t) == 0:
+        return
+    #Ввод x и a
+    f.l()
+    print("Введите X", end="")
+    x = f.defend_input()
+    f.l()
+    print("Введите α", end="")
+    while True:
+        a = f.defend_input()
+        if 0.1 <= a <= 5: break
+        else: print("Значения нет в диапазоне.", end="")
+    f.l()
+    #Расчёт Z
+    z = []
+    for t_i in t:
+        if t_i == 0: z.append(nan)
+        else:
+            nmrtr = a * ((5 * pi * (t_i ** 2)) + 3 * cos(2 * x))
+            dnmtr = log(abs(t_i) + 1) - sin(t_i) ** 2
+            answ = nmrtr / dnmtr * exp(-a * x) + sqrt(complex(a * t_i))
+            z.append(answ)
+    # Вывод данных.
+    def out_z():
         f.l()
-        z=[]
-        for t_i in t:
-            if t_i==0:z.append(np.nan)
-            else:
-                nmrtr=a*((5*np.pi*(t_i**2))+3*np.cos(2*x))
-                dnmtr=np.log(abs(t_i)+1)-np.sin(t_i)**2
-                answ=nmrtr/dnmtr*np.exp(-a*x)+np.sqrt(complex(a*t_i))
-                z.append(answ)
-        #Вывод данных.
-        def out_z():
-            f.l()
-            print("Z(t, x, a)= ...")
-            x_out=f.simple_complex(x,3,0)
-            a_out=f.simple_complex(a,3,0)
-            for t_i,z_i in zip(t,z):
-                t_out=f.simple_complex(t_i,3,0)
-                z_out=f.simple_complex(z_i,3,0)
-                print("Z(",t_out,", ",x_out,", ",a_out,") = ",z_out,sep='')
-        print("Вывести данные? Y/N",end='')
-        f.yes_or_not(out_z)
-        #Построение графика
-        def graph():
-            plt.plot(t,np.real(z),'-r')
-            plt.plot(t,np.imag(z),'-g')
-            plt.xlabel("t")
-            plt.ylabel("Z(t)")
-            plt.title("Зависимость Z от t")
-            plt.legend(["Re(Z)","Im(Z)"])
-            plt.show()
-        print("Вывести график? Y/N",end='')
-        f.yes_or_not(graph)
-        
-run_exercise_6()
+        print("Z(t, x, α) = ...")
+        x_out = f.simple_complex(x, 3, 0)
+        a_out = f.simple_complex(a, 3, 0)
+        for t_i, z_i in zip(t, z):
+            t_out = f.simple_complex(t_i, 3, 0)
+            z_out = f.simple_complex(z_i, 3, 0)
+            print("Z(", t_out, ", ", x_out, sep="", end="")
+            print(", ", a_out, ") = ", z_out, sep="") 
+    # Построение графика
+    def graph():
+        if len(z) > 30:
+            plt.plot(t, np.real(z), '-r')
+            plt.plot(t, np.imag(z), '-g')
+        else:
+            plt.plot(t, np.real(z), '-or')
+            plt.plot(t, np.imag(z), '-og')
+        plt.xlabel("t")
+        plt.ylabel("Z(t)")
+        plt.title("Зависимость Z от t")
+        plt.legend(["Re(Z)", "Im(Z)"])
+        plt.show()
+    # Интерфейс
+    print("Вывести данные?")
+    f.yes_or_not(out_z)
+    f.l()
+    print("Вывести график?")
+    f.yes_or_not(graph)
