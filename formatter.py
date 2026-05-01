@@ -1,57 +1,83 @@
 import numpy as np
+from typing import Union, Callable, List, Optional
+    
 
-def ex(exercize_number):
+def ex(exercise_number: Union[str, int, float]) -> None:
     """
     Выводит в консоль упражнение с указанным в аргументе номером.
     """
-    print("\n==========")
-    print("Задание ", exercize_number)
-def eq(equal_quantity=5):
+    print("==========")
+    print("Задание ", exercise_number)
+
+
+def eq(equal_quantity: int = 5) -> None:
     """
     Выводит в консоль знак "=" в количестве, указанном в аргументе.
     """
-    print('\n'+"="*equal_quantity)
-def d(dash_quantity=5):
+    print("=" * equal_quantity)
+
+
+def d(dash_quantity: int = 5) -> None:
     """
     Выводит в консоль знак "-" в количестве, указанном в аргументе.
     """
-    print('\n'+"-"*dash_quantity)
-def n():
+    print("-" * dash_quantity)
+
+
+def n() -> None:
     """
     Выводит в консоль:༺•༻
     """
-    print("\n༺•༻")
-def l(line=5):
+    print("༺•༻")
+
+
+def l(line: int = 5) -> None:
     """
     Выводит в консоль знак "─" в количестве, указанном в аргументе.
     """
-    print('─'*line)
-def ln():
+    print("─" * line)
+
+
+def ln() -> None:
     """
     Выводит в консоль ───────✧───────
     """
-    print("\n───────✧───────")
+    print("───────✧───────")
     
-def yes_or_not(Function_yes=lambda:None,Function_not=lambda:None):
+
+
+def yes_or_not(function_yes: Callable[[], None] = lambda: None,
+               function_not: Callable[[], None] = lambda: None
+               ) -> None:
     """
     . . .
-    yes_or_not(Func_yes,Func_not)
-    Даёт пользователю в консоли выбор между двумя функциями, заданными в аргументе.
-    В случае ввода "Y"(или y,д,Д,1) (Yes) - выполняется функция из первого аргумента.
-    В случае ввода "N"(или n,н,Н,0)(No) - выполняется функция из второго аргумента.
+    yes_or_not(Func_yes, Func_not)
+    Даёт пользователю в консоли выбор между двумя функциями, 
+    заданными в аргументе.
+    В случае ввода "Y"(или y, д, Д, 1) (Yes):
+        выполняется функция из первого аргумента.
+    В случае ввода "N"(или n, н, Н, 0) (No):
+        выполняется функция из второго аргумента.
     По умолчанию в обоих случаях функции ничего не делают.
     """
+    out_flag = ""
+    print("(y/n)", end = "")
     while True:
-        out_flag=input('(y/n)>:')
-        if out_flag=="":continue
-        elif out_flag in "yY1дД":
-            Function_yes()
+        out_flag = input("> ")
+        if out_flag in "yY1дД" and out_flag != "":
+            function_yes()
             break
-        elif out_flag in "nN0нН":
-            Function_not()
+        elif out_flag in "nN0нН" and out_flag != "":
+            function_not()
             break
+        else:print("(y/n)", end = "")
 
-def simple_complex(x,round_digitals=3,is_print=False,is_i=True,is_return=True):
+
+def simple_complex(x: Union[int,float,complex],
+                   round_digitals: int = 3,
+                   is_print: bool = False,
+                   is_i: bool = True,
+                   is_return: bool = True) -> Optional[str]:
     """
     return result
     Преобразует комплексное число в удобно-читаемую строку.
@@ -64,98 +90,111 @@ def simple_complex(x,round_digitals=3,is_print=False,is_i=True,is_return=True):
         False - Инженерная - "j"
     is_return - возвращать ли строку в result
     """
-    rnd=int(round_digitals)
-    if is_i:unit='i'
-    if not is_i:unit='j'
-    if np.isnan(x):x_ir,x_ii="nan",'' #случай nan
-    elif np.isinf(x):x_ir,x_ii="inf",'' #случай inf
+    rnd = int(round_digitals)
+    if is_i: unit = "i"
+    if not is_i: unit = "j"
+    if np.isnan(x): x_ir, x_ii = "nan","" #случай nan
+    elif np.isinf(x): x_ir, x_ii = "inf","" #случай inf
     else:
-        x_ir=round(float(np.real(x)),rnd)
-        x_ii=round(float(np.imag(x)),rnd)
-        if float(x_ir)==int(x_ir):x_ir=int(x_ir) #убираем лишний .0
-        if float(x_ii)==int(x_ii):x_ii=int(x_ii) #убираем лишний .0
-        if x_ir==0 and x_ii!=0:x_ir='' #число не вещественное
-        if x_ii==0:x_ii='' #число не мнимое
-        elif x_ii>0 and x_ir!='':x_ii='+'+str(x_ii)+unit
-        elif x_ii>0 and x_ir=='':x_ii=str(x_ii)+unit
-        elif x_ii<0:x_ii=str(x_ii)+unit #минус сам допишется
-    result=str(x_ir)+str(x_ii)
-    if is_print:print(result)
-    if is_return:return result
-    
+        x_ir = round(float(np.real(x)), rnd)
+        x_ii = round(float(np.imag(x)), rnd)
+        if float(x_ir) == int(x_ir): x_ir = int(x_ir)
+        if float(x_ii) == int(x_ii): x_ii = int(x_ii)
+        if x_ir == 0 and x_ii != 0: x_ir = "" #число не вещественное
+        if x_ii == 0: x_ii = "" #число не мнимое
+        elif x_ii > 0 and x_ir != "": x_ii = " + " + str(x_ii) + unit
+        elif x_ii > 0 and x_ir == "": x_ii = str(x_ii) + unit
+        elif x_ii < 0 and x_ir != "": x_ii = " - " + str(abs(x_ii)) + unit
+        elif x_ii < 0 and x_ir == "": x_ii = str(x_ii) + unit
+    result = str(x_ir) + str(x_ii)
+    if is_print: print(result)
+    if is_return: return result
 
-def multi_input():
+
+def multi_input() -> List[float]:
     """
-    Даёт возможность определить в консоли переменную как значение, массив или диапазон np.linspace.
+    Даёт возможность определить в консоли переменную как значение, 
+    массив или диапазон np.linspace.
     Возвращает list(float)
     """    
     #Ввод данных
-    print("Для ввода массива используйте запятые.",sep="")
-    print("Для ввода диапазона введите d.",end="")
-    x=input(">")
+    print("Для ввода массива используйте запятые.", sep = "")
+    print("Для ввода диапазона введите d.", end = "")
+    x=input("> ")
     #Ввод диапазона
-    if x!='d':
+    if x != 'd':
         try:
-            x=list(map(float,(x.split(','))))
+            x = list(map(float, (x.split(','))))
         except ValueError:
-            print("\nНеверный тип данных\n>",end="")
+            print("Неверный тип данных.", end = "")
             while True:
                 try:
-                    x=input('>')
-                    if x=='d':break
-                    x=list(map(float,x.split(',')))
+                    x = input('> ')
+                    if x == 'd': break
+                    x = list(map(float, x.split(',')))
                     break
-                except ValueError:print("Неверный тип данных",end="")
-        points=1
+                except ValueError: 
+                    print("Неверный тип данных.", end = "")
+        points = 1
     #Ввод t
-    if x=='d':
-        x=0
+    if x == 'd':
+        l()
+        print("Введите начало диапазона", end = "")
         while True:
             try:
-                start=float(input("Введите начало диапазона\n>"))
+                start = float(input("> "))
                 break
-            except ValueError:print("Неверный тип данных\n>")
+            except ValueError: print("Неверный тип данных.", end = "")
+        l()
+        print("Введите конец диапазона", end = "")
         while True:
             try:
-                end=float(input("Введите конец диапазона\n>"))
+                end = float(input("> "))
                 break
-            except ValueError:print("Неверный тип данных.")
+            except ValueError: print("Неверный тип данных.", end = "")
+        l()
+        print("Введите количество элементов", end = "")
         while True:
             try:
-                points=int(input("Введите количество элементов\n>"))
-                x=np.linspace(start,end,points)
-                x=list(map(float,x))
+                points = int(input("> "))
+                x = np.linspace(start, end, points)
+                x = list(map(float, x))
                 break
-            except (ValueError, TypeError):print("Неверный тип данных или отрицательное значение.")
+            except (ValueError, TypeError):
+                print("Неверный тип данных" ,end = "")
+                print(" или отрицательное значение.", end = "")
     
     #Крайние случаи       
-    if points==0:
+    if points == 0:
         print("Значения отсутствуют.")
-        x=[]
+        x = []
     return x
 
-def defend_input(complex_allow=False,nan_inf_allow=False):
+#
+def defend_input(complex_allow: bool = False,
+                 nan_inf_allow: bool = False) -> Union[float, complex]:
     """
     Даёт пользователю возможность назначить переменную с защитой
     значения от неверного типа данных.
     return(float)
     complex_allow позволяет работать с комплексными числами.
-    nan_inf_allow позволяют обрабатывать nan и inf как валидный результат
+    nan_inf_allow позволяет работать с nan и inf.
     """
     while True:
         try:
-            if complex_allow:x=complex(input(">"))
-            if not complex_allow:x=float(input(">"))
-            if not nan_inf_allow and np.isnan(x):raise ValueError
-            if not nan_inf_allow and np.isinf(x):raise ValueError
+            if complex_allow: x = complex(input("> "))
+            if not complex_allow: x = float(input("> "))
+            if not nan_inf_allow and np.isnan(x): raise ValueError
+            if not nan_inf_allow and np.isinf(x): raise ValueError
             return x
         except ValueError:
-            print("Неверный тип данных.")
-            
-            
-def greek_alphabet():
+            print("Неверный тип данных.", end="")
+
+
+def greek_alphabet() -> None:
     """
-    Выводит в консоль греческий алфавит,знак корня и умножения для копипаста.
+    Выводит в консоль греческий алфавит,знак корня и
+    знак умножения для копипаста.
     """
     print("Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ")
     print("Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω")
