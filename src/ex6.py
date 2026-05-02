@@ -44,6 +44,7 @@ def run_exercise_6() -> None:
             dnmtr = log(abs(t_i) + 1) - sin(t_i) ** 2
             answ = nmrtr / dnmtr * exp(-a * x) + sqrt(complex(a * t_i))
             z.append(answ)
+   
     # Вывод данных.
     def out_z():
         f.l()
@@ -55,6 +56,7 @@ def run_exercise_6() -> None:
             z_out = f.simple_complex(z_i, 3, 0)
             print("Z(", t_out, ", ", x_out, sep="", end="")
             print(", ", a_out, ") = ", z_out, sep="") 
+   
     # Построение графика
     def graph():
         if len(z) > 30:
@@ -65,6 +67,7 @@ def run_exercise_6() -> None:
             plt.plot(t, np.imag(z), '-og')
         plt.xlabel("t")
         plt.ylabel("Z(t)")
+        plt.grid()
         plt.title("Зависимость Z от t")
         plt.legend(["Re(Z)", "Im(Z)"])
         plt.show()

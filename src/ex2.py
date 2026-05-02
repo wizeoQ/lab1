@@ -38,10 +38,14 @@ def run_exercise_2() -> None:
             print(" = ", f.simple_complex(j, 3), sep="")
     
     
-    def draw_plot():
+    def graph():
+        if len(z) > 30:
+            plt.plot(t, np.real(z), '-r')
+            plt.plot(t, np.imag(z), '-g')
+        else:
+            plt.plot(t, np.real(z), '-or')
+            plt.plot(t, np.imag(z), '-og')
         f.l()
-        plt.plot(t, np.real(z), '|r-')
-        plt.plot(t, np.imag(z), '|b-')
         plt.legend(['Re(Z)', 'Im(Z)'])
         plt.title("Зависимость Z от t")
         plt.xlabel("t")
@@ -55,4 +59,4 @@ def run_exercise_2() -> None:
     f.yes_or_not(print_z)
     f.l()
     print("Нужен ли вывод графика?")
-    f.yes_or_not(draw_plot)    
+    f.yes_or_not(graph)    

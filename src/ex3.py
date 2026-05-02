@@ -9,31 +9,16 @@ def run_exercise_3() -> None:
     """
     f.ex(3)
     # Ввод чисел, которые необходимо проверить.
-    print("Введите через запятую массив чисел, ", end="")
-    print("который необходимо проверить", end="")
-    while True:
-        try:
-            points = list(map(float, input("> ").split(',')))
-            break
-        except (ValueError, TypeError):
-            print("Неправильный тип данных.", end="")
+    print("Введите через запятую массив чисел,\
+          который необходимо проверить")
+    points = f.multi_input(0)
     f.l()
     # Ввод диапазона, в котором должны быть числа.
     print("Введите начало диапазона, в котором будет проверка.", end="")
-    while True:
-        try:
-            start = float(input("> "))
-            break
-        except (ValueError, TypeError):
-            print("Неправильный тип данных.", end="")
+    start = f.defend_input()
     f.l()
     print("Введите конец диапазона, в котором будет проверка.", end="")
-    while True:
-        try:
-            end = float(input("> "))
-            break
-        except (ValueError, TypeError):
-            print("Неправильный тип данных.", end="")
+    end = f.defend_input()
     # Изменение максимальной и минимальной точки диапазона
     if start > end:
         start, end = end, start
@@ -88,7 +73,9 @@ def run_exercise_3() -> None:
     plt.axhline(y=0, color='red') # Вся ось (красная)
     plt.axvline(x=9.5, color='grey', linestyle='--', alpha=0.25)
     plt.axvline(x=0, color='grey', linestyle='--', alpha=0.25)
-    if len(sort) == 1:
+    if start == 0 and end == 0:
+        plt.axis([-0.5, 0.5, -1, 1])
+    elif len(sort) == 1:
         plt.axis([-0.1 * (end - start), end + 0.1 * (end - start), -1, 1])
     else:
         plt.axis([sort[0] - 0.1 * df, sort[-1] + 0.1 * df, -1, 1])

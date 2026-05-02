@@ -111,20 +111,23 @@ def simple_complex(x: Union[int, float, complex],
     if is_return: return result
 
 
-def multi_input() -> List[float]:
+def multi_input(allow_linspace: bool=True) -> List[float]:
     """
     Просит у пользователя ввести число, массив или диапазон.
     
     Даёт возможность определить в консоли переменную как значение, 
     массив (через запятую) или диапазон (с началом, концом
     и количеством элементов).
+    Чтобы отключить возможность ввода диапазона, нужно
+    ввести аргумент 0.
     """    
     # Ввод данных
     print("Для ввода массива используйте запятые.", sep="")
-    print("Для ввода диапазона введите d.", end="")
+    if allow_linspace:
+        print("Для ввода диапазона введите d.", end="")
     x=input("> ")
     # Ввод диапазона
-    if x != 'd':
+    if x != 'd' or not allow_linspace:
         try:
             x = list(map(float, (x.split(','))))
         except ValueError:
@@ -132,14 +135,14 @@ def multi_input() -> List[float]:
             while True:
                 try:
                     x = input('> ')
-                    if x == 'd': break
+                    if x == 'd' and allow_linspace: break
                     x = list(map(float, x.split(',')))
                     break
                 except ValueError: 
                     print("Неверный тип данных.", end="")
         points = 1
     # Ввод t
-    if x == 'd':
+    if x == 'd' and allow_linspace:
         l()
         print("Введите начало диапазона", end="")
         while True:
