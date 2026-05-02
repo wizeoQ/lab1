@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import nan, pi, cos, sin, log, exp, sqrt
 import matplotlib.pyplot as plt
-import formatter as f
+import wizeo_lib as f
 
 
 def run_exercise_6() -> None:

@@ -1,4 +1,4 @@
-import formatter as f
+import wizeo_lib as f
 
 
 def run_exercise_7() -> None:

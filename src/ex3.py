@@ -1,4 +1,4 @@
-import formatter as f
+import wizeo_lib as f
 import numpy as np
 import matplotlib.pyplot as plt
 

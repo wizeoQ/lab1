@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import formatter as f
+import wizeo_lib as f
 
 
 def run_exercise_2() -> None:

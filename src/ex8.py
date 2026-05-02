@@ -1,5 +1,5 @@
 import random as rnd
-import formatter as f
+import wizeo_lib as f
 
 
 def run_exercise_8() -> None:
