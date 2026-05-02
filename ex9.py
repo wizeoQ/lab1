@@ -18,7 +18,7 @@ def run_exercise_9(variant: int=1) -> None:
         print(text)
         f.l()
         text_process = text.lower()
-        text_process = text.replace("?", " ")
+        text_process = text_process.replace("?", " ")
         text_process = text_process.replace("!", " ")
         text_process = text_process.replace(".", " ")
         text_process = text_process.replace(",", " ")

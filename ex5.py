@@ -7,6 +7,7 @@ def run_exercise_5() -> None:
     """
     f.ex(5)
     string = input("Это палиндром?\n>")
+    string = string.lower()
     if string == "": print("Да")
     else:
         i = 0

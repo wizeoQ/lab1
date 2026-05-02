@@ -29,7 +29,7 @@ def run_exercise_6() -> None:
     print("Введите X", end="")
     x = f.defend_input()
     f.l()
-    print("Введите α", end="")
+    print("Введите α (диапазон: 0.1 - 5.0)", end="")
     while True:
         a = f.defend_input()
         if 0.1 <= a <= 5: break
@@ -69,7 +69,7 @@ def run_exercise_6() -> None:
         plt.legend(["Re(Z)", "Im(Z)"])
         plt.show()
     # Интерфейс
-    print("Вывести данные?")
+    print("Вывести данные?/nПредупреждение: Их может быть много.")
     f.yes_or_not(out_z)
     f.l()
     print("Вывести график?")

@@ -51,12 +51,12 @@ def run_exercise_3() -> None:
         print("В заданном диапазоне значений нет.", end="")
         return
     # Вывод, если точки есть
-        print("Массив:\n", points, sep="")
-        print("Среди точек отрезку [", start, ",", end, "] ", end="", sep="")
-        print("принадлежат:")
-        for i, j in zip(calc_out, calc_index):
-            print(i, '(', j, ')', sep='')
-        f.l()
+    print("Массив:\n", points, sep="")
+    print("Среди точек отрезку [", start, ",", end, "] ", end="", sep="")
+    print("принадлежат:")
+    for i, j in zip(calc_out, calc_index):
+        print(i, '(', j, ')', sep='')
+    f.l()
     # Сортировка точек с сохранением индексов
     print("Сортировка массива:")
     sort = np.sort(calc_out)
@@ -97,4 +97,3 @@ def run_exercise_3() -> None:
     for i, j in zip(sort, labels):
         plt.text(i, 0.07, j, horizontalalignment='center', fontsize=10)
     plt.show()
-    
