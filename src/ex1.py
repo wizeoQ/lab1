@@ -20,7 +20,6 @@ def run_exercise_1() -> None:
     # Ввод возраста
     f.l()
     print("Сколько Вам лет?", end="")
-    epstein = False
     while True:
         age = 0
         try:
@@ -35,9 +34,6 @@ def run_exercise_1() -> None:
             if age < 0:
                 print("Родись, а потом поговорим.")
                 return
-            elif 0 <= age <= 12:
-                epstein = True
-                break
             elif age > 100:
                 print("Хиппуешь, плесень?")
                 return
@@ -58,13 +54,8 @@ def run_exercise_1() -> None:
             print("ОТДАЙ ДАННЫЕ.", end="")
         else:
             break
-    if place.lower() in ("москва", "moscow"):
-        print("ебать мажор")
     # Вывод данных
     f.l()
-    if epstein:
-        print("Данные переданы Джеффри Эпштейну.")
-    else:
-        print("Ваши ФИО -", name)
-        print("Ваш возраст -", age)
-        print("Ваше место жительство -", place)
+    print("Ваши ФИО -", name)
+    print("Ваш возраст -", age)
+    print("Ваше место жительство -", place)
